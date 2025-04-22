@@ -1,0 +1,46 @@
+﻿@model Asset
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<h4>Asset</h4>
+<hr />
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Asset Name</dt>
+            <dd class="col-sm-8">@Model.AssetName</dd>
+
+            <dt class="col-sm-4">Asset Type</dt>
+            <dd class="col-sm-8">@Model.AssetType</dd>
+
+            <dt class="col-sm-4">Serial Number</dt>
+            <dd class="col-sm-8">@Model.SerialNumber</dd>
+
+            <dt class="col-sm-4">Purchase Date</dt>
+            <dd class="col-sm-8">@Model.PurchaseDate.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-4">Warranty Expiry Date</dt>
+            <dd class="col-sm-8">@Model.WarrantyExpiryDate?.ToString("dd/MM/yyyy")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="form-group mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary btn-sm">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        window.history.pushState("", "", "/");
+    </script>
+}

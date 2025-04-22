@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Asset>
+
+@{
+    ViewData["Title"] = "Index Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AssetName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AssetType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.SerialNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.PurchaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.WarrantyExpiryDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssetName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssetType)
+                    </td>
+                    <td>
+                        @item.SerialNumber
+                    </td>
+                    <td>
+                        @item.PurchaseDate
+                    </td>
+
+                    <td>
+                        @item.WarrantyExpiryDate
+                    </td>
+                    <td>
+                         <a href="javascript:void(0);"
+                           class="btn btn-primary btn-sm"
+                           onclick='redirectToAction("EmployeeManagement","Asset","Edit","@item.Id")'>Edit</a> |
+                        <a href="javascript:void(0);"
+                           class="btn btn-secondary btn-sm"
+                           onclick='redirectToAction("EmployeeManagement","Asset","Details","@item.Id")'>Details</a>
+                        |
+                        <a href="javascript:void(0);"
+                           class="btn btn-danger btn-sm "
+                           onclick='redirectToDelete("EmployeeManagement","Asset","Delete","@item.Id")' id="delete-${@item.Id}">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    
+}
